@@ -1,4 +1,4 @@
-package com.jaycejia;
+package com.jaycejia.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.jaycejia.R;
 import com.jaycejia.databinding.FragmentRefrigeratorListBinding;
 import com.jaycejia.utils.ToastUtil;
 

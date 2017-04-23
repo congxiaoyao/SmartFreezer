@@ -17,8 +17,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.jaycejia.common.AppCompatAndroidApplication;
 import com.jaycejia.databinding.ActivityMainBinding;
 import com.jaycejia.databinding.FragmentMyRefrigeratorBinding;
+import com.jaycejia.fragment.RefrigeratorListFragment;
 import com.jaycejia.utils.ToastUtil;
 
 import java.util.ArrayList;

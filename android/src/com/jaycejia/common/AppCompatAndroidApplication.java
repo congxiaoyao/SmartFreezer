@@ -1,4 +1,4 @@
-package com.jaycejia;
+package com.jaycejia.common;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

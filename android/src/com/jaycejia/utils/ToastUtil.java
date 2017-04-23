@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.jaycejia.App;
+import com.jaycejia.common.App;
 
 
 /**

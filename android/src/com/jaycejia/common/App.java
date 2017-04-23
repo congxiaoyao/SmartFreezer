@@ -1,4 +1,4 @@
-package com.jaycejia;
+package com.jaycejia.common;
 
 import android.app.Application;
 import android.content.Context;
