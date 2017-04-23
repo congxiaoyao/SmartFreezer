@@ -26,7 +26,7 @@ import com.jaycejia.utils.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AndroidLauncher extends AppCompatAndroidApplication implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatAndroidApplication implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 	private ActivityMainBinding binding = null;
 	private int[] bgSelector = {R.drawable.tab1_picture_selector, R.drawable.tab2_picture_selector};
 	private List<Fragment> mFragments = new ArrayList<>();
@@ -156,7 +156,7 @@ public class AndroidLauncher extends AppCompatAndroidApplication implements View
 		@Override
 		public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 			this.binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_my_refrigerator, container, false);
-			this.binding.freezerContainer.addView(((AndroidLauncher) getContext()).view);
+			this.binding.freezerContainer.addView(((MainActivity) getContext()).view);
 			return this.binding.getRoot();
 		}
 	}
