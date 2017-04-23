@@ -16,8 +16,14 @@ android {
     }
     defaultConfig {
         applicationId "com.jaycejia"
-        minSdkVersion 8
+        minSdkVersion 19
         targetSdkVersion 25
+    }
+    dataBinding{
+        enabled = true
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
     }
 }
 

@@ -5,7 +5,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
     }
 }
 
@@ -51,6 +51,22 @@ project(":android") {
     dependencies {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        compile 'com.android.support:appcompat-v7:25.3.0'
+        compile 'com.android.support:recyclerview-v7:25.0.+'
+        compile 'io.reactivex:rxjava:1.1.7'
+        compile 'io.reactivex:rxandroid:1.2.1'
+
+        compile 'com.squareup.okhttp3:okhttp:3.6.0'
+        compile 'com.squareup.okio:okio:1.11.0'
+
+        compile 'com.squareup.retrofit2:retrofit:2.1.0'
+        compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+        compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+        compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
+
+        compile 'com.google.code.gson:gson:2.3.1'
+        compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.6.0'
+        compile 'com.android.support:design:25.2.0'
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
