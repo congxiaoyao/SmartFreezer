@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.jaycejia.R;
 import com.jaycejia.databinding.ActivityHomePagerBinding;
+import com.jaycejia.utils.StatusBarUtil;
 
 /**
  * Created by NiYang on 2017/4/30.
@@ -26,6 +27,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         this.binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_home_pager, null, false);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        StatusBarUtil.fitSystemBarTextColor(this);
         setContentView(this.binding.getRoot());
 
         initView();

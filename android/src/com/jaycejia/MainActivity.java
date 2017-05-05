@@ -21,6 +21,7 @@ import com.jaycejia.common.AppCompatAndroidApplication;
 import com.jaycejia.databinding.ActivityMainBinding;
 import com.jaycejia.databinding.FragmentMyRefrigeratorBinding;
 import com.jaycejia.fragment.RefrigeratorListFragment;
+import com.jaycejia.utils.StatusBarUtil;
 import com.jaycejia.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		StatusBarUtil.fitSystemBarTextColor(this);
 		this.binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_main, null, false);
 		setContentView(this.binding.getRoot());
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();

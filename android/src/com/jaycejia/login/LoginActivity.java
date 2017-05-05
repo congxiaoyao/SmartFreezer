@@ -11,6 +11,7 @@ import android.view.View;
 import com.jaycejia.MainActivity;
 import com.jaycejia.R;
 import com.jaycejia.databinding.ActivityLoginBinding;
+import com.jaycejia.utils.StatusBarUtil;
 import com.jaycejia.utils.ToastUtil;
 
 /**
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.fitSystemBarTextColor(this);
         this.binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_login, null, false);
         setContentView(this.binding.getRoot());
 
