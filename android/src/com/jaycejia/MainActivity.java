@@ -21,6 +21,7 @@ import com.jaycejia.common.AppCompatAndroidApplication;
 import com.jaycejia.databinding.ActivityMainBinding;
 import com.jaycejia.databinding.FragmentMyRefrigeratorBinding;
 import com.jaycejia.fragment.RefrigeratorListFragment;
+import com.jaycejia.utils.LogUtil;
 import com.jaycejia.utils.StatusBarUtil;
 import com.jaycejia.utils.ToastUtil;
 
