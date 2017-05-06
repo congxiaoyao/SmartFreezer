@@ -5,11 +5,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加"
+            android:id="@+id/btn_add"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_remove"
+            android:layout_below="@id/btn_add"
+            android:text="删除"/>
+
+
         <FrameLayout
             android:id="@+id/freezer_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </layout>

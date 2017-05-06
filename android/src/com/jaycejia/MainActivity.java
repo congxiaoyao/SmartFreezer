@@ -2,6 +2,7 @@ package com.jaycejia;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.PixelFormat;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -16,11 +17,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.jaycejia.common.AndroidSensorApplication;
 import com.jaycejia.common.AppCompatAndroidApplication;
 import com.jaycejia.databinding.ActivityMainBinding;
 import com.jaycejia.databinding.FragmentMyRefrigeratorBinding;
 import com.jaycejia.fragment.RefrigeratorListFragment;
+import com.jaycejia.utils.ImageFactory;
 import com.jaycejia.utils.LogUtil;
 import com.jaycejia.utils.StatusBarUtil;
 import com.jaycejia.utils.ToastUtil;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 	private List<Fragment> mFragments = new ArrayList<>();
 	private MainViewPagerAdapter adapter = null;
 	private View view = null;
+	private Freezer freezer = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +47,12 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 		this.binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_main, null, false);
 		setContentView(this.binding.getRoot());
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		config.r = config.g = config.b = config.a = 8;
-		this.view = initializeForView(new MyGdxGame(), config);
-		if (graphics.getView() instanceof SurfaceView) {
-			SurfaceView glView = (SurfaceView) graphics.getView();
-			glView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-			glView.setZOrderOnTop(true);
-		}
-
+		this.freezer = new MyGdxGame();
+		this.view = initializeForView((ApplicationListener) freezer, config);
+        if (graphics.getView() instanceof SurfaceView) {
+            SurfaceView glView = (SurfaceView) graphics.getView();
+            glView.setZOrderMediaOverlay(true);
+        }
 		this.binding.llPersonal.setOnClickListener(this);
 		this.binding.llShare.setOnClickListener(this);
 		this.binding.llMyFamily.setOnClickListener(this);
@@ -60,12 +63,11 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 		initTabLayout();
 	}
 
-	private void initFragment() {
+    private void initFragment() {
 		this.mFragments.add(new MyRefrigeratorFragment());
 		this.mFragments.add(new RefrigeratorListFragment());
 		this.adapter = new MainViewPagerAdapter(getSupportFragmentManager(), this.mFragments);
 		this.binding.viewPager.setAdapter(this.adapter);
-		this.binding.viewPager.setCurrentItem(0);
 		this.binding.tabLayout.setTabMode(TabLayout.MODE_FIXED);
 		this.binding.tabLayout.setupWithViewPager(this.binding.viewPager);
 	}
@@ -100,7 +102,15 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 		}
 	}
 
-	@Override
+//    @Override
+//    public void onSensorChanged(SensorEvent event) {
+//        super.onSensorChanged(event);
+//        float xValue = event.values[0];
+//        float yValue = event.values[1];
+//        freezer.onSensorChanged(xValue, yValue);
+//    }
+
+    @Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.ll_personal:
@@ -156,11 +166,34 @@ public class MainActivity extends AppCompatAndroidApplication implements View.On
 
 	public static class MyRefrigeratorFragment extends Fragment {
 		private FragmentMyRefrigeratorBinding binding = null;
+		private Freezer freezer;
+		private long id = -1;
 		@Override
 		public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+			this.freezer = ((MainActivity) getContext()).freezer;
 			this.binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_my_refrigerator, container, false);
 			this.binding.freezerContainer.addView(((MainActivity) getContext()).view);
+			this.binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String[] names = new String[]{"茄子", "西红柿", "薯条", "cxy"};
+					freezer.addFood(++id, names[(int) (Math.random() * names.length)]);
+				}
+			});
+			this.binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (id == -1) return;
+					freezer.removeFood(id--);
+				}
+			});
 			return this.binding.getRoot();
+		}
+
+		@Override
+		public void onDestroy() {
+			super.onDestroy();
+			ImageFactory.clear();
 		}
 	}
 }

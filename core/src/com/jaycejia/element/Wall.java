@@ -10,10 +10,8 @@ public class Wall extends GameElement {
 
     public static final int TYPE_L =  0;
     public static final int TYPE_R =  1;
-    public static final int TYPE_TL = 2;
-    public static final int TYPE_TR = 3;
-    public static final int TYPE_BL = 4;
-    public static final int TYPE_BR = 5;
+    public static final int TYPE_T = 3;
+    public static final int TYPE_B = 4;
 
     private int type = -1;
 

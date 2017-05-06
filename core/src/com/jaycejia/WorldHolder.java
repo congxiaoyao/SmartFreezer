@@ -53,7 +53,7 @@ public class WorldHolder{
 
         //定义hockey
         for (int i = 0; i < 10; i++) {
-            circleShape.setRadius(U.World.HOCKEY_RADIUS);
+            circleShape.setRadius(U.World.FOOD_RADIUS);
             ballBodyDef.position.set((float) (Math.random() * 5f + 1),
                     (float) (Math.random() * 5f + 3f));
             ballBodyDef.linearDamping = 0.6f;
@@ -61,13 +61,13 @@ public class WorldHolder{
             Body tempBody = world.createBody(ballBodyDef);
             tempBody.createFixture(ballFixDef);
         }
+
     }
 
     /**
-     * 初始化六面墙
+     * 初始化四面墙
      */
     private void initWalls() {
-
         wallShape = new PolygonShape();
         wallBodyDef = new BodyDef();
         wallBodyDef.type = BodyDef.BodyType.StaticBody;
@@ -84,9 +84,9 @@ public class WorldHolder{
         tempBody = createWallBody(U.World.WALL_RIGHT_CENTER);
         walls[1] = new Wall(tempBody, createVerticalWallFixture(tempBody), Wall.TYPE_R);
         tempBody = createWallBody(U.World.WALL_TOP_CENTER);
-        walls[2] = new Wall(tempBody, createWallHorizontalFixture(tempBody), Wall.TYPE_TR);
+        walls[2] = new Wall(tempBody, createWallHorizontalFixture(tempBody), Wall.TYPE_T);
         tempBody = createWallBody(U.World.WALL_BOTTOM_CENTER);
-        walls[3] = new Wall(tempBody, createWallHorizontalFixture(tempBody), Wall.TYPE_BL);
+        walls[3] = new Wall(tempBody, createWallHorizontalFixture(tempBody), Wall.TYPE_B);
     }
 
     private Body createWallBody(Vector2 center) {

@@ -10,17 +10,20 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class U {
 
-    private static final String ASSETS_BASE = "assets/";
+    private static final String ASSETS_BASE = "";
 
     private static final Vector2 mouse = new Vector2();
     //屏幕宽度
     public static final float S_W = Gdx.graphics.getWidth();
     //屏幕高度
     public static final float S_H = Gdx.graphics.getHeight();
+    static {
+        System.out.println("cxy " + S_H);
+    }
     //屏幕或世界的高宽比
     public static final float WH_RADIO = S_H / S_W;
     //物理世界的宽度（米）
-    public static final float W_W = 7.2f;
+    public static final float W_W = 2.7f;
 
     //物理世界的高度（米）
     public static final float W_H = W_W * WH_RADIO;
@@ -31,42 +34,20 @@ public class U {
     public static final float STD_HOR_RADIO = S_W / 1080;
 
     //屏幕高度与标准屏幕的比例
-    public static final float STD_VER_RADIO = S_H / 1920;
+    public static final float STD_VER_RADIO = S_H / 1589;
 
     /**
      * 在屏幕上的各个物体显示出来的宽高及位置等常量
      */
     public static final class Screen {
-        //冰球的直径
-        public static final float HOCKEY_BALL_DIAMETER = byStdHor(136f);
-        //玩家的直径
-        public static final float PLAYER_BALL_DIAMETER = byStdHor(236f);
-        //重试按钮的宽度
-        public static final float RETRY_BUTTON_WIDTH = byStdHor(331);
-        //重试按钮的高度
-        public static final float RETRY_BUTTON_HEIGHT = byStdVer(219);
-        //上方玩家起始位置的中心坐标
-        public static final Vector2 PLAYER_SOUTH_START = new Vector2(S_W / 2, byStdVer(200));
-        //下方玩家起始位置的中心坐标
-        public static final Vector2 PLAYER_NORTH_START = new Vector2(S_W / 2, byStdVer(1720));
+        //食物直径
+        public static final float FOOD_DIAMETER = byStdHor(160);
 
-        //上面的计分板的中心点
-        public static final Vector2 SCORE_BOARD_TOP_POSITION =
-                new Vector2(byStdHor(934.5f), byStdVer(1120));
-        //下面的计分板的中心点
-        public static final Vector2 SCORE_BOARD_BOTTOM_POSITION =
-                new Vector2(byStdHor(934.5f), byStdVer(800));
         //屏幕中心
         public static final Vector2 CENTER_SCREEN = new Vector2(S_W / 2, S_H / 2);
-        //上罚球线的中心点
-        public static final Vector2 CENTER_TOP_SERVICE_LINE =
-                new Vector2(S_W / 2, S_H * 2 / 3);
-        //下罚球线的中心点
-        public static final Vector2 CENTER_BOTTOM_SERVICE_LINE =
-                new Vector2(S_W / 2, S_H / 3);
 
         public static final float SCALE_X = S_W / 1080;
-        public static final float SCALE_Y = S_H / 1920;
+        public static final float SCALE_Y = S_H / 1589;
         public static final float SCALE = SCALE_X;
     }
 
@@ -77,60 +58,50 @@ public class U {
 
         //左边的墙的中心点
         public static final Vector2 WALL_LEFT_CENTER =
-                new Vector2(toWorld(byStdHor(42.5f)), W_H / 2);
+                new Vector2(toWorld(byStdHor(110)), W_H / 2);
         //右边的墙的中心点
         public static final Vector2 WALL_RIGHT_CENTER =
-                new Vector2(toWorld(byStdHor(1080 - 42.5f)), W_H / 2);
+                new Vector2(toWorld(byStdHor(U.S_W - 110f)), W_H / 2);
         //竖直墙半高
-        public static final float WALL_VER_HALF_HEIGHT = toWorld(byStdVer(500));
-//        public static final float WALL_VER_HALF_HEIGHT = toWorld(byStdVer(950));
-
+        public static final float WALL_VER_HALF_HEIGHT = U.W_H / 2;
         //竖直墙半宽
-        public static final float WALL_VER_HALF_WIDTH = toWorld(byStdHor(7.5f));
-        //左上墙的中心点
+        public static final float WALL_VER_HALF_WIDTH = toWorld(byStdHor(20f));
+        //上墙的中心点
         public static final Vector2 WALL_TOP_CENTER =
-                new Vector2(W_W/2, toWorld(byStdVer(1920 - 460f)));
-//        public static final Vector2 WALL_TOP_CENTER =
-//                new Vector2(W_W/2, toWorld(byStdVer(1920 - 42.5f)));
-        //左下墙的中心点
+                new Vector2(W_W / 2, toWorld(byStdVer(U.S_H - 90f)));
+        //下墙的中心点
         public static final Vector2 WALL_BOTTOM_CENTER =
-                new Vector2(W_W / 2, toWorld(byStdVer(460f)));
-//        public static final Vector2 WALL_BOTTOM_CENTER =
-//                new Vector2(W_W / 2, toWorld(byStdVer(42.5f)));
+                new Vector2(W_W / 2, toWorld(byStdVer(210f)));
         //水平墙半高
-        public static final float WALL_HOR_HALF_HEIGHT = toWorld(byStdVer(7.5f));
+        public static final float WALL_HOR_HALF_HEIGHT = toWorld(byStdVer(35f));
 
         //水平墙半宽
-        public static final float WALL_HOR_HALF_WIDTH = toWorld(byStdHor(500));
-        //冰球的半径
-        public static final float HOCKEY_RADIUS = toWorld(byStdHor(57));
+        public static final float WALL_HOR_HALF_WIDTH = U.W_W / 2;
+        //食物的半径
+        public static final float FOOD_RADIUS = toWorld(Screen.FOOD_DIAMETER / 2);
 
-        //player的半径
-        public static final float PLAYER_RADIUS = toWorld(byStdHor(100));
-        //在物理世界中playerS的起始位置
-        public static final Vector2 PLAYER_SOUTH_START = Screen.PLAYER_SOUTH_START.cpy();
-        //在物理世界中playerN的起始位置
-        public static final Vector2 PLAYER_NORTH_START = Screen.PLAYER_NORTH_START.cpy();
-        //屏幕中心
-        public static final Vector2 CENTER_WORLD = Screen.CENTER_SCREEN.cpy();
-        //上罚球线的中心点
-        public static final Vector2 CENTER_TOP_SERVICE_LINE =
-                Screen.CENTER_TOP_SERVICE_LINE.cpy();
-        //下罚球线的中心点
-        public static final Vector2 CENTER_BOTTOM_SERVICE_LINE =
-                Screen.CENTER_BOTTOM_SERVICE_LINE.cpy();
-        static {
-            toWorld(PLAYER_SOUTH_START);
-            toWorld(PLAYER_NORTH_START);
-            toWorld(CENTER_WORLD);
-            toWorld(CENTER_TOP_SERVICE_LINE);
-            toWorld(CENTER_BOTTOM_SERVICE_LINE);
-        }
+        //世界中心
+        public static final Vector2 CENTER_WORLD = toWorld(Screen.CENTER_SCREEN.cpy());
     }
 
     public static final class Image {
 
-        public static Texture BADLOGIC = new Texture(ASSETS_BASE + "badlogic.jpg");
+        public static final String BADLOGIC = ASSETS_BASE + "badlogic.jpg";
+        public static final String BACKGROUND = ASSETS_BASE + "icon_freezer_bg.png";
+        public static final String NONE = ASSETS_BASE + "icon_circle_none.png";
+        public static final String CABBAGE = ASSETS_BASE + "icon_circle_cabbage.png";
+        public static final String CHIPS = ASSETS_BASE + "icon_circle_chips.png";
+        public static final String CUCUMBER = ASSETS_BASE + "icon_circle_cucumber.png";
+        public static final String DRUMSTICK = ASSETS_BASE + "icon_circle_drumstick.png";
+        public static final String EGG = ASSETS_BASE + "icon_circle_egg.png";
+        public static final String EGGPLANT = ASSETS_BASE + "icon_circle_eggplant.png";
+        public static final String MAIZE = ASSETS_BASE + "icon_circle_maize.png";
+        public static final String PORK = ASSETS_BASE + "icon_circle_pork.png";
+        public static final String SAUSAGE = ASSETS_BASE + "icon_circle_sausage.png";
+        public static final String STEAK = ASSETS_BASE + "icon_circle_steak.png";
+        public static final String STRAWBERRY = ASSETS_BASE + "icon_circle_strawberry.png";
+        public static final String TOMATO = ASSETS_BASE + "icon_circle_tomato.png";
+        public static final String WATERMELON = ASSETS_BASE + "icon_circle_watermelon.png";
     }
 
     /**
